@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.url">jdbc:mysql://10.45.173.149:3306/shiro</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">talk915</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="show_sql">true</property>  
+		<mapping resource="com/zjj/bean/UserBean.hmb.xml"></mapping>
+		<mapping resource="com/zjj/bean/ShiroRoleBean.hmb.xml"></mapping>
+		<mapping resource="com/zjj/bean/ShiroUserRoleBean.hmb.xml"></mapping>
+		<mapping resource="com/zjj/bean/ShiroResourceBean.hmb.xml"></mapping>
+		<mapping resource="com/zjj/bean/ShiroPermissionBean.hmb.xml"></mapping>
+    </session-factory>
+
+</hibernate-configuration>

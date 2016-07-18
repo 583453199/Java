@@ -1,0 +1,26 @@
+/* 第一版分页样式 */
+/* 
+.pagination-inner{height:38px;text-align:center;vertical-align:middle;font-family:"微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;}
+.pagination-inner a, .pagination-inner span{margin:8px 3px;padding:0px 3px;height:20px;line-height:20px;display:inline-block;min-width:25px;background-color:transparent;color:#3983CC;text-align:center;vertical-align:middle;}
+.pagination-inner a{border:1px solid #cbdff2;border-radius:3px;cursor:pointer;text-decoration:none;outline-style:none;}
+.pagination-inner a:hover, .pagination-inner .active, .pagination-inner a:focus{color:#ffffff;background-color:#4085d4;border:1px solid #4085d4;}
+.pagination-inner .previous, .pagination-inner .next{font-size:16px;}
+.pagination-inner .previous:focus, .pagination-inner .next:focus{color:#428BCA;background:none;}
+.pagination-inner .disabled{color:#DFDFDF;border:1px solid #DFDFDF;}
+.pagination-inner .gopage_wrap{display:inline-block;width:44px;height:18px;border:1px solid #DFDFDF;margin:8px 2px;padding:0px;position:relative;left:0px;top:0px;}
+.pagination-inner .btn_go {width:44px;height:20px;line-height:20px;padding:0px;font-family:arial,宋体,sans-serif;text-align:center;border:0px;background-color:#0063DC;color:#FFF;position:absolute;left:0px;top:-1px;display:none;cursor:pointer;}
+.pagination-inner .btn_go_input{width:42px;height:18px;line-height:18px;text-align:center;border:0px;position:absolute;left:0px;top:0px;outline:none;}
+ */
+
+/* 第二版分页样式 */
+.pagination-inner{clear:both;margin-top:20px;margin-bottom:20px;margin-right:20px;text-align:right;font: 14px/1.8 "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;}
+.pagination-inner a,.pagination-inner span{margin:0px 3px;height:38px;line-height:38px;display:inline-block;text-align:center;vertical-align:middle;font-family:Arial;transition:background-color 0.2s ease-out}
+.pagination-inner span{background-color:transparent;color:#666;}
+.pagination-inner a{padding:0px 2px;min-width:30px;background-color:#fff;color:#666;border:1px solid #dfdfdf;cursor:pointer;text-decoration:none;outline-style:none;}
+.pagination-inner a:hover, .pagination-inner .active, .pagination-inner a:focus{color:#fff;background-color:#0099cc;}
+.pagination-inner .previous,.next{font-size:20px;}
+.pagination-inner .previous:focus, .pagination-inner .next:focus{color:#428BCA;background:none;}
+.pagination-inner .disabled{padding:0px 2px;min-width:30px;background-color:#fff;font-size:20px;cursor:default;color:#dfdfdf;border:1px solid #dfdfdf;}
+.pagination-inner .gopage_wrap{display:inline-block;width:44px;height:38px;border:1px solid #DFDFDF;margin:8px 2px;padding:0px;position:relative;left:0px;top:0px;}
+.pagination-inner .btn_go {width:40px;height:40px;line-height:40px;padding:0px;font-family:arial,宋体,sans-serif;text-align:center;border:0px;background-color:#0099cc;color:#FFF;position:absolute;left:0px;top:-1px;display:none;cursor:pointer;}
+.pagination-inner .btn_go_input{width:42px;height:38px;line-height:38px;text-align:center;border:0px;position:absolute;left:0px;top:0px;outline:none;}

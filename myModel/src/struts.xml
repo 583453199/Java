@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+           "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<!-- 配置使用Spring管理Action --> 
+    <constant name="struts.objectFactory" value="spring"/>   
+    <!-- 让struts2始终先考虑spring的自动装箱  -->
+    <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />       
+	
+	<package name="user" extends="struts-default" namespace="/user">
+		<action name="*" class="userAction" method="{1}">
+			<result name="login">/login.jsp</result>
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="recoverPassword">/user/recoverPassword.jsp</result>
+			<result name="toIndex" type="redirectAction">
+				<param name="namespace">/user</param>
+				<param name="actionName">index</param>
+			</result>
+			
+			<result name="toStudentIndex" type="redirectAction">
+				<param name="namespace">/student</param>
+				<param name="actionName">studentIndex</param>
+			</result>
+			
+			<result name="toTeacherIndex" type="redirectAction">
+				<param name="namespace">/teacher</param>
+				<param name="actionName">teacherIndex</param>
+			</result>
+			
+			<result name="toAdminIndex" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">adminIndex</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="student" extends="struts-default" namespace="/student">
+		<action name="*" class="studentAction" method="{1}">
+			<result name="index">/student/studentIndex.jsp</result>
+		</action>
+	</package>
+	
+	<package name="teacher" extends="struts-default" namespace="/teacher">
+		<action name="*" class="teacherAction" method="{1}">
+			<result name="index">/teacher/teacherIndex.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin" extends="struts-default" namespace="/admin">
+		<action name="*" class="adminAction" method="{1}">
+			<result name="index">/admin/adminIndex.jsp</result>
+			<result name="userAdd" type="redirect">/admin/userAdd.jsp?msg=${msg}</result>
+			<result name="userManage">/admin/userManage.jsp</result>
+			<result name="resourceManage">/admin/resourceManage.jsp</result>
+			<result name="roleManage">/admin/roleManage.jsp</result>
+			<result name="roleResourceEdit">/admin/roleResourceEdit.jsp</result>
+		</action>
+	</package>
+	
+	<package name="asyn" extends="struts-default,json-default" namespace="/asyn">
+		<action name="*" class="asynAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>

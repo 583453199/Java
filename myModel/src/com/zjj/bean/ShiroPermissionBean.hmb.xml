@@ -1,0 +1,14 @@
+<?xml version="1.0"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class table="shiro_permission" name="com.zjj.bean.ShiroPermissionBean" dynamic-insert="true" dynamic-update="true">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="resourceId" column="resource_id"></property>
+		<property name="roleId" column="role_id"></property>
+		<property name="status"></property>
+	</class>
+</hibernate-mapping>
