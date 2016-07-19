@@ -18,8 +18,6 @@ import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.apache.struts2.StrutsStatics;
 import org.apache.struts2.json.annotations.JSON;
 
@@ -30,7 +28,6 @@ import com.zjj.bean.UserBean;
 import com.zjj.service.ShiroResourceService;
 import com.zjj.service.ShiroRoleService;
 import com.zjj.service.UserService;
-import com.zjj.shiro.resource.MenuButtonResource;
 import com.zjj.util.MyMD5Util;
 import com.zjj.util.common.Page;
 
@@ -66,11 +63,11 @@ public class AdminAction extends ActionSupport {
 	 */
 	public String adminIndex() {
 		System.out.println("AdminAction.adminIndex()");
-		Subject subject = SecurityUtils.getSubject();  
-		System.out.println("a1 = " + subject.isPermitted(new MenuButtonResource("a1")));
-		System.out.println("a2 = " + subject.isPermitted(new MenuButtonResource("a2")));
-		System.out.println("a3 = " + subject.isPermitted(new MenuButtonResource("a3")));
-		System.out.println("a4 = " + subject.isPermitted(new MenuButtonResource("a4")));
+//		Subject subject = SecurityUtils.getSubject();  
+//		System.out.println("a1 = " + subject.isPermitted(new MenuButtonResource("a1")));
+//		System.out.println("a2 = " + subject.isPermitted(new MenuButtonResource("a2")));
+//		System.out.println("a3 = " + subject.isPermitted(new MenuButtonResource("a3")));
+//		System.out.println("a4 = " + subject.isPermitted(new MenuButtonResource("a4")));
 		return "index";
 	}
 	

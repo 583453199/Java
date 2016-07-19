@@ -4,7 +4,8 @@
 <struts>
 	<constant name="struts.i18n.reload" value="true" />
 	<constant name="struts.i18n.encoding" value="utf-8" />
-	<constant name="struts.devMode" value="true" />
+	<!-- 如果开启开发默认则 异步ajax调用Action传值会出现异常 -->
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.configuration.xml.reload" value="true"/>
 	<!-- 配置使用Spring管理Action --> 

@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
@@ -37,6 +38,9 @@ public class ResourceManage {
 		Set<String> paramSet = ShiroHelper.getParamSet(queryString);
 		Set<String> protectedResourceIds = matchedProtectedResourceIds(requestURI, paramSet);
 		if (CollectionUtils.isEmpty(protectedResourceIds)) {
+			return true;
+		}
+		if (MapUtils.isEmpty(resourceIdRolesMap)) {
 			return true;
 		}
 		// 没有登录

@@ -11,12 +11,13 @@ public class SessionUtil {
 
 	public static void putUserInSession(UserBean bean) {
 		Map<String, Object> userInfo = new HashMap<String, Object>();
-		userInfo.put("USER_ID", bean.getUserId() + "");
-		userInfo.put("ACCOUNT", bean.getAccount());
-		userInfo.put("USER_NAME", bean.getUserName());
-		userInfo.put("AGE", bean.getAge() + "");
-		userInfo.put("USER_TYPE", bean.getUserType() + "");
-
+		if (bean != null) {
+			userInfo.put("USER_ID", bean.getUserId() + "");
+			userInfo.put("ACCOUNT", bean.getAccount());
+			userInfo.put("USER_NAME", bean.getUserName());
+			userInfo.put("AGE", bean.getAge() + "");
+			userInfo.put("USER_TYPE", bean.getUserType() + "");
+		}
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.put("user", userInfo);
 

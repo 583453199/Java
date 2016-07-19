@@ -85,13 +85,13 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
-	 * 找回密码
+	 * 注销
 	 * 
 	 * @return
 	 */
-	public String recoverPassword() {
-		
-		return "recoverPassword";
+	public String logout() {
+		SessionUtil.putUserInSession(null);
+		return "toIndex";
 	}
 
 	public String index() {

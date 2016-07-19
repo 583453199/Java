@@ -16,7 +16,7 @@ public class NamespaceResource {
 	 * @return
 	 */
 	public boolean match(String requestURI) {
-		if (requestURI.indexOf(namespace) > 0) {
+		if (requestURI.indexOf(namespace) >= 0) {
 			return true;
 		}
 		return false;

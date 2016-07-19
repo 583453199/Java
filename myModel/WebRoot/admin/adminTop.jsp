@@ -5,6 +5,6 @@
 <div class="t_header">
 	<div class="top_left">
 		欢迎，
-		<s:property value="#session.user.ACCOUNT" />
+		<s:property value="#session.user.ACCOUNT" /> <label style="margin-left: 20px;"><a href="/user/logout.action" class="my_button w_50">退出</a></label>
 	</div>
 </div>

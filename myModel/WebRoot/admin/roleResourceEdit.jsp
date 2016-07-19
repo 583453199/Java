@@ -32,7 +32,7 @@
 			<form action="admin/roleResourceEdit.action" id="form1" method="post">
 				<input type="hidden" name="id" id="roleId" value="${id}"/>
 				<ul id="tree" class="ztree"></ul>
-				<a href="javascript:;" class="my_button color03 subAdd" style="width: 50px;margin: 20px;m" onclick="operateSub()">提交</a>
+				<a href="javascript:;" class="my_button color03 subAdd" style="width: 50px;margin: 20px;" onclick="operateSub()">提交</a>
 			</form>
 		</div>
 	</div>
