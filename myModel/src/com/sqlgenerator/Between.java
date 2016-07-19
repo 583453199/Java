@@ -1,6 +1,5 @@
 package com.sqlgenerator;
 
-
 import java.io.Serializable;
 import java.util.List;
 
