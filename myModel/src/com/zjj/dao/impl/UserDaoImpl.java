@@ -165,4 +165,5 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		map.put("TOTAL_NUM", totalNum);
 		return map;
 	}
+	
 }

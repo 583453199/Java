@@ -82,7 +82,7 @@
 									</td>
 									<td>
 										<label><a href="javascript:;" class="x_button w_50 color02">删除</a></label>
-										<label class="ml_10"><a href="javascript:;" class="x_button w_100 color02">用户角色授权</a></label>
+										<label class="ml_10"><a href="/admin/toUserRoleEdit.action?id=<s:property value="#user.userId"/>" class="x_button w_100 color02">用户角色授权</a></label>
 									</td>
 								</tr>
 							</s:iterator>

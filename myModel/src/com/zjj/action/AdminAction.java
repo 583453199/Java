@@ -57,6 +57,7 @@ public class AdminAction extends ActionSupport {
 	private String id;
 	private String msg;
 	private String content;
+	private boolean resultStatus;
 	
 	/**
 	 * 管理员后台首页
@@ -117,6 +118,55 @@ public class AdminAction extends ActionSupport {
 			page.setTotalNum((Integer) map.get("TOTAL_NUM"));
 		}
 		return "userManage";
+	}
+	
+	/**
+	 * 跳转到 - 用户角色 - 授权
+	 * 
+	 * @return
+	 */
+	public String toUserRoleEdit() {
+		list = roleService.queryUserRole(id);
+		return "userRoleEdit";
+	}
+	
+	/**
+	 * 用户角色  - 授权 - 提交
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public String userRoleSub() {
+		Set<String> set = new HashSet<String>();
+		if (StringUtils.isNotBlank(content)) {
+			String[] array = content.split(",");
+			for (int i = 0; i < array.length; i++) {
+				array[i] = array[i].trim();
+			}
+			set = new HashSet(Arrays.asList(array));
+		}
+
+		List<String> updateList = new ArrayList<String>();
+		List<String> addList = new ArrayList<String>();
+		List<String> allList = new ArrayList<String>(set);
+		List<Map<String, Object>> list = roleService.queryExistUserRole(id, null);
+		if (CollectionUtils.isNotEmpty(list)) {
+			for (Map<String, Object> map : list) {
+				String dbRoleId = String.valueOf(map.get("ROLE_ID"));
+				if (set.contains(dbRoleId)) {
+					updateList.add(dbRoleId);
+				}
+			}
+			boolean hasAddList = allList.removeAll(updateList);
+			if (hasAddList) {
+				addList = allList;
+			}
+		} else {
+			addList.addAll(set);
+		}
+
+		resultStatus = roleService.updateUserRole(updateList, addList, id);
+		return "toUserManage";
 	}
 	
 	/**
@@ -205,10 +255,10 @@ public class AdminAction extends ActionSupport {
 				if (set.contains(dbResourceId)) {
 					updateList.add(dbResourceId);
 				}
-				boolean hasAddList = allList.removeAll(updateList); 
-				if (hasAddList) {
-					addList = allList;
-				}
+			}
+			boolean hasAddList = allList.removeAll(updateList); 
+			if (hasAddList) {
+				addList = allList;
 			}
 		} else {
 			addList.addAll(set);
@@ -309,4 +359,13 @@ public class AdminAction extends ActionSupport {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public boolean isResultStatus() {
+		return resultStatus;
+	}
+
+	public void setResultStatus(boolean resultStatus) {
+		this.resultStatus = resultStatus;
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.zjj.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import com.zjj.dao.ShiroRoleDao;
@@ -23,6 +24,21 @@ public class ShiroRoleServiceImpl implements ShiroRoleService {
 	@Override
 	public boolean addRole(Map<String, Object> paramMap) {
 		return shiroRoleDao.addRole(paramMap);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryUserRole(String userId) {
+		return shiroRoleDao.queryUserRole(userId);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryExistUserRole(String userId, String status) {
+		return shiroRoleDao.queryExistUserRole(userId, status);
+	}
+	
+	@Override
+	public boolean updateUserRole(List<String> updateList, List<String> addList, String userId) {
+		return shiroRoleDao.updateUserRole(updateList, addList, userId);
 	}
 
 	public ShiroRoleDao getShiroRoleDao() {

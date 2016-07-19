@@ -58,6 +58,11 @@
 			<result name="index">/admin/adminIndex.jsp</result>
 			<result name="userAdd" type="redirect">/admin/userAdd.jsp?msg=${msg}</result>
 			<result name="userManage">/admin/userManage.jsp</result>
+			<result name="toUserManage" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">userManage</param>
+			</result>
+			<result name="userRoleEdit">/admin/userRoleEdit.jsp</result>
 			<result name="resourceManage">/admin/resourceManage.jsp</result>
 			<result name="roleManage">/admin/roleManage.jsp</result>
 			<result name="roleResourceEdit">/admin/roleResourceEdit.jsp</result>
