@@ -2,10 +2,10 @@ package com.zjj.util.test;
 
 import org.junit.Test;
 
-import com.sqlgenerator.Command;
-import com.sqlgenerator.Query;
-import com.sqlgenerator.SQL;
-import com.sqlgenerator.Service;
+import com.sql.generator.Command;
+import com.sql.generator.Query;
+import com.sql.generator.SQL;
+import com.sql.generator.Service;
 
 
 

@@ -2,7 +2,7 @@
 <%@ taglib prefix="zjj" uri="http://10.204.42.36/s2shModel/tags"%>
 <div class="adminLeft list">
 	<ul class="yiji">
-		<li><a href="javascript:;">个人中心</a></li>
+		<li><a href="/admin/adminIndex.action">个人中心</a></li>
 		<li><a href="javascript:;" class="inactive">权限管理</a>
 			<ul style="display: none">
 				<li><a href="javascript:;" class="inactive active">用户管理</a>

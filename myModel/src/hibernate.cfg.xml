@@ -11,7 +11,7 @@
         <property name="connection.username">root</property>
         <property name="connection.password">talk915</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="show_sql">true</property>  
+		<property name="show_sql">false</property>  
 		<mapping resource="com/zjj/bean/UserBean.hmb.xml"></mapping>
 		<mapping resource="com/zjj/bean/ShiroRoleBean.hmb.xml"></mapping>
 		<mapping resource="com/zjj/bean/ShiroUserRoleBean.hmb.xml"></mapping>

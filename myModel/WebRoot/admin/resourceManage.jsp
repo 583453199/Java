@@ -87,7 +87,7 @@
 									</td>
 									<td>
 										<s:if test="#bean.STATUS == 0">
-											<a href="javascript:;" class="my_button w_50 color02">删除</a>
+											<a href="javascript:;" class="x_button w_50 color02">删除</a>
 										</s:if>
 									</td>
 								</tr>
@@ -121,7 +121,7 @@
 				<tr><td>值：</td><td><input type="text" id="value" class="input02 w_200 fl"/></td></tr>
 				<tr><td>描述：</td><td><input type="text" id="description" class="input02 w_200 fl"/></td></tr>
 				<tr><td>url：</td><td><input type="text" id="url" class="input02 w_200 fl"/></td></tr>
-				<tr><td colspan="2"><a href="javascript:;" class="my_button w_50 color04" onclick="addResource()">确定</a></td></tr>
+				<tr><td colspan="2"><a href="javascript:;" class="x_button w_50 color04" onclick="addResource()">确定</a></td></tr>
 				<tr><td colspan="2" id="addMsg">&nbsp;</td></tr>
 			</tbody>
 		</table>
@@ -179,7 +179,7 @@
 			} 
 			var map = {"value":value,"description":description,"url":url};
 			$.ajax({
-				url:"/asyn/addResourceSubmit.action",
+				url:"/adminAsyn/addResourceSubmit.action",
 				data: map,
 				dataType:"json",
 				type: "post",
@@ -187,7 +187,7 @@
 					var msg = data.statusCode ? "添加成功！" : "添加失败！";
 					$.zxxbox.remind(msg, function() {
 						$("#subSearch").click();
-					},{btnclose:false})
+					},{btnclose:false,width:350})
 				}
 			})
 		}

@@ -16,12 +16,12 @@ import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.sqlgenerator.Command;
-import com.sqlgenerator.MergeRule;
-import com.sqlgenerator.ResultColumnValue;
-import com.sqlgenerator.SQL;
-import com.sqlgenerator.Service;
-import com.sqlgenerator.Util;
+import com.sql.generator.Command;
+import com.sql.generator.MergeRule;
+import com.sql.generator.ResultColumnValue;
+import com.sql.generator.SQL;
+import com.sql.generator.Service;
+import com.sql.generator.Util;
 
 
 public class HibernateBasic extends HibernateDaoSupport {
@@ -259,7 +259,6 @@ public class HibernateBasic extends HibernateDaoSupport {
 			// 把参数直接写到statement中，不再作为sql的参数
 			this.statement = Util.getSqlWithValue(this.statement, param, placeholderOffset, false);
 		}
-		System.out.println(statement);
 		this.params = resolvedParams;
 	}
 	

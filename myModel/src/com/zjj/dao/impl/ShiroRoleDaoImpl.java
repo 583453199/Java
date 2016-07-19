@@ -7,10 +7,11 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.sqlgenerator.Query;
-import com.sqlgenerator.SQL;
-import com.sqlgenerator.Service;
-import com.sqlgenerator.Util;
+import com.sql.generator.Insert;
+import com.sql.generator.Query;
+import com.sql.generator.SQL;
+import com.sql.generator.Service;
+import com.sql.generator.Util;
 import com.zjj.dao.ShiroRoleDao;
 import com.zjj.util.CommonUtil;
 import com.zjj.util.HibernateBasic;
@@ -24,7 +25,8 @@ public class ShiroRoleDaoImpl implements ShiroRoleDao {
 	@Override
 	public Map<String, Object> queryRoleList(Map<String, String> requestMap, Page page) {
 		String description = (String) requestMap.get("description");
-		Query mainQuery = SQL.select("ROLE_ID,DESCRIPTION,STATUS");
+		
+		Query mainQuery = SQL.select("ROLE_ID,DESCRIPTION,STATUS,BUILTIN");
 		mainQuery.select("DATE_FORMAT(CREATE_TIME,'%Y-%m-%d %H:%i:%s') AS CREATE_TIME");
 		mainQuery.from("SHIRO_ROLE");
 		mainQuery.where("STATUS=", 0);
@@ -34,6 +36,7 @@ public class ShiroRoleDaoImpl implements ShiroRoleDao {
 		if (page != null) {
 			mainQuery.limit(page.getOffset(), page.getPageSize());
 		}
+		mainQuery.orderBy("ROLE_ID DESC");
 		mainQuery.setGenerateCountQuery(true);
 
 		Service service = new Service(mainQuery);
@@ -53,6 +56,57 @@ public class ShiroRoleDaoImpl implements ShiroRoleDao {
 		return resultMap;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> queryRoleByNameOrId(String name, String roleId) {
+		Query mainQuery = SQL.select("ROLE_ID,DESCRIPTION,STATUS,BUILTIN");
+		mainQuery.from("SHIRO_ROLE");
+		if (StringUtils.isNotBlank(name)) {
+			mainQuery.and("DESCRIPTION=", name);
+		}
+		if (StringUtils.isNotBlank(roleId)) {
+			mainQuery.and("ROLE_ID=", roleId);
+		}
+		mainQuery.limit(1);
+
+		Service service = new Service(mainQuery);
+		service.useCustomResultTransformer();
+		service.setDescription(this.getClass() + ".queryRoleByNameOrId()");
+		Map<String, Object> result = hibernateBasic.execute(service);
+		if (CommonUtil.isInvalid(result)) {
+			return null;
+		}
+		List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(mainQuery.getResultCallback());
+		if (CollectionUtils.isEmpty(list)) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public boolean addRole(Map<String, Object> paramMap) {
+		String createUser = (String) paramMap.get("create_user");
+		String createTime = (String) paramMap.get("create_time");
+		String description = (String) paramMap.get("description");
+		String builtin = (String) paramMap.get("builtin");
+		
+		Insert insert = SQL.insert("shiro_role");
+		insert.value("create_user", createUser);
+		insert.value("create_time", createTime);
+		insert.value("description", description);
+		insert.value("status", 0);
+		insert.value("builtin", builtin);
+		
+		Service service = new Service(insert);
+		service.useCustomResultTransformer();
+		service.setDescription(this.getClass() + ".addRole()");
+		Map<String, Object> result = hibernateBasic.execute(service);
+		if (CommonUtil.isInvalid(result)) {
+			return false;
+		}
+		return true;
+	}
+	
 	public HibernateBasic getHibernateBasic() {
 		return hibernateBasic;
 	}

@@ -38,7 +38,7 @@
 							<td>
 								<label style="float: right;">
 									<span><a href="javascript:;" id="subSearch" class="my_button w_70 color01">搜索</a></span>
-									<span class="ml_10"><a href="javascript:;" id="resourceAdd" class="my_button w_70">角色新增</a></span>
+									<span class="ml_10 mr_20"><a href="javascript:;" id="roleAdd" class="my_button w_70">角色新增</a></span>
 								</label>
 							</td>
 						</tr>
@@ -77,9 +77,9 @@
 										<s:else>删除</s:else>
 									</td>
 									<td>
-										<s:if test="#bean.STATUS == 0">
-											<a href="javascript:;" class="my_button w_50 color02">删除</a>
-											<a href="<%=basePath%>admin/roleResourceEdit.action?id=<s:property value="#bean.ROLE_ID"/>" class="my_button w_80 color02">角色资源授权</a>
+										<s:if test="#bean.STATUS == 0 && #bean.BUILTIN == 1">
+											<a href="javascript:;" class="x_button w_50 color02">删除</a>
+											<a href="<%=basePath%>admin/roleResourceEdit.action?id=<s:property value="#bean.ROLE_ID"/>" class="x_button w_80 color02">角色资源授权</a>
 										</s:if>
 									</td>
 								</tr>
@@ -96,25 +96,15 @@
 	</div>
 	
 	<div id="addBox" style="display: none;">
-		<table style="width: 340px;text-align: center;" class="resource_add">
+		<p id="addMsg" class="red mt_10" style="text-align: center;">&nbsp;</p>
+		<table style="width: 340px;text-align: center;margin: 10px;" class="resource_add">
 			<colgroup>
 				<col width="20%"/>
 				<col width="80%"/>
 			</colgroup>
 			<tbody>
-				<tr><td>类型：</td>
-					<td>
-						<select class="select01 fl" id="type">
-							<option value="1">菜单</option>
-							<option value="0">命名空间</option>
-						</select>
-					</td>
-				</tr>
-				<tr><td>值：</td><td><input type="text" id="value" class="input02 w_200 fl"/></td></tr>
-				<tr><td>描述：</td><td><input type="text" id="description" class="input02 w_200 fl"/></td></tr>
-				<tr><td>url：</td><td><input type="text" id="url" class="input02 w_200 fl"/></td></tr>
-				<tr><td colspan="2"><a href="javascript:;" class="my_button w_50 color04" onclick="addResource()">确定</a></td></tr>
-				<tr><td colspan="2" id="addMsg">&nbsp;</td></tr>
+				<tr><td>角色名：</td><td><input type="text" id="roleName" class="input02 w_200 fl" maxlength="50"/></td></tr>
+				<tr><td colspan="2"><a href="javascript:;" class="my_button w_50 color04" onclick="add()">确定</a></td></tr>
 			</tbody>
 		</table>
 	</div>
@@ -153,33 +143,33 @@
 				$("#form1").submit(); 
 			});
 			
-			$("#resourceAdd").bind("click", function(){
-				$("#addBox").zxxbox({title:"资源新增",width:340});
+			$("#roleAdd").bind("click", function(){
+				$("#addBox").zxxbox({title:"角色新增",width:340});
 			});
 		})
 		
-		function addResource() {
-			var value = $("#value").val();
-			var description = $("#description").val();
-			var url = $("#url").val();
-			if (!value) {
-				$("#addMsg").html("请完善资源值！");
+		function add() {
+			var roleName = $("#roleName").val();
+			if (!roleName) {
+				$("#addMsg").html("角色名不能为空！");
 				return;
-			} else if (!description) {
-				$("#description").html("请完善资源描述！");
-				return;
-			} 
-			var map = {"value":value,"description":description,"url":url};
+			}
+			var map = {"description":roleName};
 			$.ajax({
-				url:"/asyn/addResourceSubmit.action",
+				url:"/adminAsyn/addRole.action",
 				data: map,
 				dataType:"json",
 				type: "post",
 				success:function(data) {
-					var msg = data.statusCode ? "添加成功！" : "添加失败！";
-					$.zxxbox.remind(msg, function() {
-						$("#subSearch").click();
-					},{btnclose:false})
+					var resultCode = data.resultCode;
+					if (resultCode == 2) {
+						$("#addMsg").html("角色名已存在！");
+					} else {
+						var msg = resultCode == 0 ? "添加成功！" : "添加失败！";
+						$.zxxbox.remind(msg, function() {
+							$("#subSearch").click();
+						},{btnclose:false,width:350})
+					}
 				}
 			})
 		}

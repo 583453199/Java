@@ -64,8 +64,8 @@
 		</action>
 	</package>
 	
-	<package name="asyn" extends="struts-default,json-default" namespace="/asyn">
-		<action name="*" class="asynAction" method="{1}">
+	<package name="adminAsyn" extends="struts-default,json-default" namespace="/adminAsyn">
+		<action name="*" class="adminAsynAction" method="{1}">
 			<result type="json"></result>
 		</action>
 	</package>

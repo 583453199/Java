@@ -39,9 +39,9 @@
 									<option value="3" <s:if test="requestMap.userType == 3">selected="selected"</s:if>>管理员</option>
 								</select>
 							</td>
-							<td>
+							<td align="right">
 								<label><a href="javascript:;" id="subSearch" class="my_button w_70 color01">搜索</a></label>
-								<label class="ml_10"><a href="<%=basePath%>admin/userAdd.jsp" class="my_button w_70">用户新增</a></label>
+								<label class="ml_10 mr_20"><a href="<%=basePath%>admin/userAdd.jsp" class="my_button w_70">用户新增</a></label>
 							</td>
 						</tr>
 					</tbody>
@@ -49,12 +49,12 @@
 				<table class="bordered">
 					<tbody>
 						<colgroup>
-						 	<col width="15%">
+						 	<col width="10%">
 	                        <col width="15%">
 	                        <col width="15%">
 	                        <col width="15%">
 	                        <col width="15%">
-	                        <col width="15%">
+	                        <col width="20%">
 						</colgroup>						
 						<thead>
 							<tr>
@@ -81,7 +81,8 @@
 										<s:elseif test="#user.userType == 3">管理员</s:elseif>
 									</td>
 									<td>
-										<a href="javascript:;" class="my_button w_50 color02">删除</a>
+										<label><a href="javascript:;" class="x_button w_50 color02">删除</a></label>
+										<label class="ml_10"><a href="javascript:;" class="x_button w_100 color02">用户角色授权</a></label>
 									</td>
 								</tr>
 							</s:iterator>

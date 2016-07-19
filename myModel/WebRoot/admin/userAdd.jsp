@@ -48,7 +48,7 @@
 							</select>
 						</td></tr>
 						  
-						<tr><td colspan="2" style="text-align: center;"><a href="javascript:;" class="mt_10 button w_100" onclick="sub()">确定</a></td></tr>
+						<tr><td colspan="2" style="text-align: center;"><a href="javascript:;" class="mt_10 my_button w_100" onclick="sub()">确定</a></td></tr>
 						<tr><td colspan="2" style="text-align: center;color: red;">
 							<% if("0".equals(msg)) {%>添加用户成功！<%} else if ("1".equals(msg)) {%>添加用户失败！<%} %>
 							</td>

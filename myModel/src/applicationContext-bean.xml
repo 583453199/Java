@@ -58,7 +58,8 @@
 	
 	<bean id="teacherAction" class="com.zjj.action.TeacherAction" scope="prototype"></bean>
 	
-	<bean id="asynAction" class="com.zjj.action.AsynAction" scope="prototype">
-		<property name="sResourceService" ref="sResourceService"></property>
+	<bean id="adminAsynAction" class="com.zjj.action.AdminAsynAction" scope="prototype">
+		<property name="resourceService" ref="sResourceService"></property>
+		<property name="roleService" ref="sRoleService"></property>
 	</bean>
 </beans>

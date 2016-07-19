@@ -15,6 +15,16 @@ public class ShiroRoleServiceImpl implements ShiroRoleService {
 		return shiroRoleDao.queryRoleList(requestMap, page);
 	}
 
+	@Override
+	public Map<String, Object> queryRoleByNameOrId(String name, String roleId) {
+		return shiroRoleDao.queryRoleByNameOrId(name, roleId);
+	}
+
+	@Override
+	public boolean addRole(Map<String, Object> paramMap) {
+		return shiroRoleDao.addRole(paramMap);
+	}
+
 	public ShiroRoleDao getShiroRoleDao() {
 		return shiroRoleDao;
 	}
@@ -22,5 +32,4 @@ public class ShiroRoleServiceImpl implements ShiroRoleService {
 	public void setShiroRoleDao(ShiroRoleDao shiroRoleDao) {
 		this.shiroRoleDao = shiroRoleDao;
 	}
-
 }

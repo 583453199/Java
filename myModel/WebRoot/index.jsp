@@ -84,7 +84,7 @@
                 <div class="content1_1">网站公告</div>
                 <div class="content1_2">
                     <span class="ml_10"><img src="images/notice.png"></img></span>
-                    <span><a href="#" style="text-decoration: none;">恭贺说客英语武汉徐东体验中心隆重开业！</a> (2016-04-29 17:46:45)</span>
+                    <span><a href="#" style="text-decoration: none;">恭贺武汉徐东体验中心隆重开业！</a> (2016-04-29 17:46:45)</span>
                     <span class="c_more"><a href="">更多</a></span>
                 </div>
             </div>
@@ -174,14 +174,15 @@
 
     <div class="footer">
         <div style="position: relative;top: 0px;left: 0px;">
-            <ul class="yqlj_ul"><li>友情链接：</li><li>中兴网信</li><li>中兴通讯</li><li>说客英语</li><li>腾讯视频</li><li>爱奇艺</li><li>优酷</li></ul>
+            <ul class="yqlj_ul"><li>友情链接：</li><li>腾讯视频</li><li>爱奇艺</li><li>优酷</li></ul>
 
             <div style="width: 450px;position: absolute;left: 138px;top: 60px;color: #fff;">
-                Copyright©zhujunjun
+                Copyright©zjj
             </div>
-            <div style="width: 450px;position: absolute;left:720px;top: 60px;color: #fff;">
-                <ul class="yqlj_ul2"><li>中兴网信</li><li>中兴通讯</li><li>说客英语</li><li>腾讯视频</li><li>爱奇艺</li><li>优酷</li></ul>
+            <%--<div style="width: 450px;position: absolute;left:720px;top: 60px;color: #fff;">
+                <ul class="yqlj_ul2"><li>腾讯视频</li><li>爱奇艺</li><li>优酷</li></ul>
             </div>
+        --%>
         </div>
     </div>
     

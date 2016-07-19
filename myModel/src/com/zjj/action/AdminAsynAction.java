@@ -1,7 +1,9 @@
 package com.zjj.action;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.json.annotations.JSON;
 
@@ -9,15 +11,20 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zjj.bean.ShiroResourceBean;
 import com.zjj.service.ShiroResourceService;
+import com.zjj.service.ShiroRoleService;
+import com.zjj.util.SessionUtil;
+import com.zjj.util.common.DateUtil;
 
-public class AsynAction extends ActionSupport {
+public class AdminAsynAction extends ActionSupport {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private ShiroResourceService sResourceService;
+	private ShiroResourceService resourceService;
+	
+	private ShiroRoleService roleService;
 	
 	private String resultCode;
 	
@@ -43,11 +50,33 @@ public class AsynAction extends ActionSupport {
 		bean.setUrl(url);
 		bean.setValue(value);
 		bean.setDescription(description);
-		String resourceId = sResourceService.addShiroResource(bean);
+		String resourceId = resourceService.addShiroResource(bean);
 		statusCode = StringUtils.isNotBlank(resourceId);
 		return Action.SUCCESS;
 	}
 
+	/**
+	 * 角色新增
+	 * 
+	 * @return resultCode: 0、成功  1、失败  2、角色已存在
+	 */
+	public String addRole() {
+		Map<String, Object> roleMap = roleService.queryRoleByNameOrId(description, null);
+		if (MapUtils.isNotEmpty(roleMap)) {
+			resultCode = "2";
+			return Action.SUCCESS;
+		}
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("description", description);
+		paramMap.put("create_user", SessionUtil.getUserSessionInfo("USER_ID"));
+		paramMap.put("create_time", DateUtil.getCurrentDateTime());
+		paramMap.put("builtin", "1");
+		boolean executeStatus = roleService.addRole(paramMap);
+		resultCode = executeStatus ? "0" : "1";
+		return Action.SUCCESS;
+	}
+	
+	
 	/**
 	 * 加载资源信息 - 角色授权
 	 * 
@@ -59,18 +88,27 @@ public class AsynAction extends ActionSupport {
 	}
 	
 	@JSON(serialize = false)
-	public ShiroResourceService getsResourceService() {
-		return sResourceService;
+	public ShiroResourceService getResourceService() {
+		return resourceService;
 	}
 
-	public void setsResourceService(ShiroResourceService sResourceService) {
-		this.sResourceService = sResourceService;
+	public void setResourceService(ShiroResourceService resourceService) {
+		this.resourceService = resourceService;
 	}
 
+	@JSON(serialize = false)
+	public ShiroRoleService getRoleService() {
+		return roleService;
+	}
+
+	public void setRoleService(ShiroRoleService roleService) {
+		this.roleService = roleService;
+	}
+	
 	public String getResultCode() {
 		return resultCode;
 	}
-	
+
 	public void setResultCode(String resultCode) {
 		this.resultCode = resultCode;
 	}

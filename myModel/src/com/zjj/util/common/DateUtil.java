@@ -65,8 +65,16 @@ public class DateUtil {
 	public static String getCurrentDateStr() {
 		Calendar cal = Calendar.getInstance();
 		Date currDate = cal.getTime();
-
 		return format(currDate);
+	}
+	
+	/**
+	 * 得到当前时间： yyyy-MM-dd HH:mm:ss
+	 * 
+	 * @return
+	 */
+	public static String getCurrentDateTime() {
+		return getCurrentDateStr(C_TIME_PATTON_DEFAULT);
 	}
 
 	/**
