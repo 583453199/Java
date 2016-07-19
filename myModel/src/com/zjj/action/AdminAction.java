@@ -43,9 +43,9 @@ public class AdminAction extends ActionSupport {
 
 	private UserService userService;
 	
-	private ShiroResourceService sResourceService;
+	private ShiroResourceService resourceService;
 	
-	private ShiroRoleService sRoleService;
+	private ShiroRoleService roleService;
 	
 	private Map<String, String> requestMap;
 	
@@ -130,7 +130,7 @@ public class AdminAction extends ActionSupport {
 			requestMap = new HashMap<String, String>();
 		}
 		int totalNum = 0;
-		Map<String, Object> map = sResourceService.queryResourceList(requestMap, page);
+		Map<String, Object> map = resourceService.queryResourceList(requestMap, page);
 		if (MapUtils.isNotEmpty(map)) {
 			list = (List<ShiroResourceBean>) map.get("LIST");
 			totalNum = Integer.parseInt((String) map.get("TOTAL_NUM"));
@@ -150,7 +150,7 @@ public class AdminAction extends ActionSupport {
 			requestMap = new HashMap<String, String>();
 		}
 		int totalNum = 0;
-		Map<String, Object> map = sRoleService.queryRoleList(requestMap, page);
+		Map<String, Object> map = roleService.queryRoleList(requestMap, page);
 		if (MapUtils.isNotEmpty(map)) {
 			list = (List<ShiroResourceBean>) map.get("LIST");
 			totalNum = Integer.parseInt((String)map.get("TOTAL_NUM"));
@@ -165,7 +165,7 @@ public class AdminAction extends ActionSupport {
 	 * @return
 	 */
 	public String roleResourceEdit() {
-		List<Map<String, Object>> list = sResourceService.queryRoleResourceList(id);
+		List<Map<String, Object>> list = resourceService.queryRoleResourceList(id);
 		if (CollectionUtils.isNotEmpty(list)) {
 			try {
 				content = JSONArray.fromObject(list).toString();
@@ -194,7 +194,7 @@ public class AdminAction extends ActionSupport {
 			set = new HashSet(Arrays.asList(selectedIds.split(",")));
 		}
 
-		List<Map<String, Object>> list = sResourceService.queryPermissionByRoleId(roleId);
+		List<Map<String, Object>> list = resourceService.queryPermissionByRoleId(roleId);
 		List<String> updateList = new ArrayList<String>();
 		List<String> addList = new ArrayList<String>();
 		List<String> allList = new ArrayList<String>(set);
@@ -214,7 +214,7 @@ public class AdminAction extends ActionSupport {
 			addList.addAll(set);
 		}
 
-		boolean resultStatus = sResourceService.updatePermissionInfo(updateList, addList, roleId);
+		boolean resultStatus = resourceService.updatePermissionInfo(updateList, addList, roleId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("RESULT_CODE", resultStatus ? "0" : "1");
 		JSONObject json = JSONObject.fromObject(map);
@@ -235,23 +235,23 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	@JSON(serialize = false)
-	public ShiroResourceService getsResourceService() {
-		return sResourceService;
+	public ShiroResourceService getResourceService() {
+		return resourceService;
 	}
 
-	public void setsResourceService(ShiroResourceService sResourceService) {
-		this.sResourceService = sResourceService;
+	public void setResourceService(ShiroResourceService resourceService) {
+		this.resourceService = resourceService;
 	}
-	
+
 	@JSON(serialize = false)
-	public ShiroRoleService getsRoleService() {
-		return sRoleService;
+	public ShiroRoleService getRoleService() {
+		return roleService;
 	}
 
-	public void setsRoleService(ShiroRoleService sRoleService) {
-		this.sRoleService = sRoleService;
+	public void setRoleService(ShiroRoleService roleService) {
+		this.roleService = roleService;
 	}
-	
+
 	public Map<String, String> getRequestMap() {
 		return requestMap;
 	}
