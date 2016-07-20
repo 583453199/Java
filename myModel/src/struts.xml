@@ -7,7 +7,7 @@
 	<!-- 如果开启开发默认则 异步ajax调用Action传值会出现异常 -->
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.ui.theme" value="simple" />
-	<constant name="struts.configuration.xml.reload" value="true"/>
+	<constant name="struts.configuration.xml.reload" value="false"/>
 	<!-- 配置使用Spring管理Action --> 
     <constant name="struts.objectFactory" value="spring"/>   
     <!-- 让struts2始终先考虑spring的自动装箱  -->
@@ -65,6 +65,7 @@
 			</result>
 			<result name="userRoleEdit">/admin/userRoleEdit.jsp</result>
 			<result name="resourceManage">/admin/resourceManage.jsp</result>
+			<result name="resourceEdit">/admin/resourceEdit.jsp</result>
 			<result name="roleManage">/admin/roleManage.jsp</result>
 			<result name="roleResourceEdit">/admin/roleResourceEdit.jsp</result>
 		</action>

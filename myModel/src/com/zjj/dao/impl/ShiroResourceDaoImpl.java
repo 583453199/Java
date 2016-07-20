@@ -39,6 +39,7 @@ public class ShiroResourceDaoImpl implements ShiroResourceDao {
 		insert.value("status", 0);
 
 		Service service = new Service(insert);
+		service.useTransaction();
 		service.setDescription(this.getClass() + ".addShiroResource()");
 		Map<String, Object> result = hibernateBasic.execute(service);
 		if (CommonUtil.isInvalid(result)) {
@@ -54,7 +55,9 @@ public class ShiroResourceDaoImpl implements ShiroResourceDao {
 	@Override
 	public Map<String, Object> queryResourceList(Map<String, String> requestMap, Page page) {
 		String description = requestMap.get("description");
+		String value = requestMap.get("value");
 		String url = requestMap.get("url");
+		
 		Query mainQuery = SQL.select("ID,TYPE,VALUE,DESCRIPTION,URL,STATUS");
 		mainQuery.from("shiro_resource");
 		if (StringUtils.isNotBlank(description)) {
@@ -62,6 +65,9 @@ public class ShiroResourceDaoImpl implements ShiroResourceDao {
 		}
 		if (StringUtils.isNotBlank(url)) {
 			mainQuery.and("url like", "%" + url + "%");
+		}
+		if (StringUtils.isNotBlank(value)) {
+			mainQuery.and("value like", "%" + value);
 		}
 
 		if (page != null) {
@@ -188,6 +194,60 @@ public class ShiroResourceDaoImpl implements ShiroResourceDao {
 			return false;
 		}
 		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> queryAllResourceByLevel(int level, String prefix) {
+		Query mainQuery = SQL.select("TYPE,VALUE,DESCRIPTION,STATUS");
+		mainQuery.from("SHIRO_RESOURCE");
+		mainQuery.where("LENGTH(VALUE)=", level);
+		mainQuery.and("STATUS=", 0);
+		mainQuery.setProhibitDefaultLimit(true);
+		if (StringUtils.isNotBlank(prefix)) {
+			mainQuery.and("VALUE LIKE", prefix + "%");
+		}
+
+		Service service = new Service(mainQuery);
+		service.useCustomResultTransformer();
+		service.setDescription(this.getClass() + ".queryAllResourceByLevel()");
+		
+		Map<String, Object> result = hibernateBasic.execute(service);
+		if (CommonUtil.isInvalid(result)) {
+			return null;
+		}
+		List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(mainQuery.getResultCallback());
+		if (CollectionUtils.isEmpty(list)) {
+			return null;
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> queryResourceType(int type, String status) {
+		Query mainQuery = SQL.select("IF(SUBSTRING(VALUE,1,LENGTH(VALUE)-1) = '',0,SUBSTRING(VALUE,1,LENGTH(VALUE)-1)) as pId,value as id,description as name");
+		mainQuery.select("'true' AS 'open',LENGTH(VALUE) as 'level',id as db_id");
+		mainQuery.from("SHIRO_RESOURCE");
+		mainQuery.where("TYPE=", type);
+		if (StringUtils.isNotBlank(status)) {
+			mainQuery.and("STATUS=", status);
+		}
+		mainQuery.setProhibitDefaultLimit(true);
+
+		Service service = new Service(mainQuery);
+		service.useCustomResultTransformer();
+		service.setDescription(this.getClass() + ".queryResourceType()");
+		
+		Map<String, Object> result = hibernateBasic.execute(service);
+		if (CommonUtil.isInvalid(result)) {
+			return null;
+		}
+		List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(mainQuery.getResultCallback());
+		if (CollectionUtils.isEmpty(list)) {
+			return null;
+		}
+		return list;
 	}
 	
 	public HibernateBasic getHibernateBasic() {

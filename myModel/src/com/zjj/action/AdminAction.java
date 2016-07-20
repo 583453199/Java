@@ -187,6 +187,23 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	/**
+	 * 资源编辑 - 跳转
+	 * 
+	 * @return
+	 */
+	public String toResourceEdit() {
+		List<Map<String, Object>> list = resourceService.queryResourceType(1, "0");
+		if (CollectionUtils.isNotEmpty(list)) {
+			try {
+				content = JSONArray.fromObject(list).toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return "resourceEdit";
+	}
+	
+	/**
 	 * 角色管理
 	 * 
 	 * @return

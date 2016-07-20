@@ -90,7 +90,6 @@ public class CommonUtil {
 		}
 	}
 	
-	
 	@SuppressWarnings("rawtypes")
 	public static boolean isInvalid(Map result) {
 		if (result == null) {
@@ -98,5 +97,10 @@ public class CommonUtil {
 		}
 			String status = (String) result.get(RET_STATUS);
 			return !"S".equalsIgnoreCase(status);
+	}
+	
+	public static String[] getCharArray() {
+		return new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+				"s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 	}
 }

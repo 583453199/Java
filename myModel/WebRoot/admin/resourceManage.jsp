@@ -36,6 +36,7 @@
 						<tr>
 							<td><strong>资源描述：</strong><s:textfield name="requestMap.description" placeholder="请输入资源描述" cssClass="input02 w_200"></s:textfield></td>
 							<td><strong>资源URL：</strong><s:textfield name="requestMap.url" placeholder="请输入资源URL" cssClass="input02 w_200"></s:textfield></td>
+							<td><strong>资源值：</strong><s:textfield name="requestMap.value" placeholder="请输入资源值" cssClass="input02 w_200"></s:textfield></td>
 							<td>
 								<label style="float: right;">
 									<span><a href="javascript:;" id="subSearch" class="my_button w_70 color01">搜索</a></span>
@@ -118,11 +119,10 @@
 						</select>
 					</td>
 				</tr>
-				<tr><td>值：</td><td><input type="text" id="value" class="input02 w_200 fl"/></td></tr>
 				<tr><td>描述：</td><td><input type="text" id="description" class="input02 w_200 fl"/></td></tr>
 				<tr><td>url：</td><td><input type="text" id="url" class="input02 w_200 fl"/></td></tr>
 				<tr><td colspan="2"><a href="javascript:;" class="x_button w_50 color04" onclick="addResource()">确定</a></td></tr>
-				<tr><td colspan="2" id="addMsg">&nbsp;</td></tr>
+				<tr><td colspan="2" id="addMsg" class="red">&nbsp;</td></tr>
 			</tbody>
 		</table>
 	</div>
@@ -167,17 +167,14 @@
 		})
 		
 		function addResource() {
-			var value = $("#value").val();
 			var description = $("#description").val();
 			var url = $("#url").val();
-			if (!value) {
-				$("#addMsg").html("请完善资源值！");
-				return;
-			} else if (!description) {
+			var type = $("#type").val();
+			if (!description) {
 				$("#description").html("请完善资源描述！");
 				return;
 			} 
-			var map = {"value":value,"description":description,"url":url};
+			var map = {"description":description,"url":url,"type":type};
 			$.ajax({
 				url:"/adminAsyn/addResourceSubmit.action",
 				data: map,

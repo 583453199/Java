@@ -1,8 +1,10 @@
 package com.zjj.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.json.annotations.JSON;
@@ -12,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zjj.bean.ShiroResourceBean;
 import com.zjj.service.ShiroResourceService;
 import com.zjj.service.ShiroRoleService;
+import com.zjj.util.CommonUtil;
 import com.zjj.util.SessionUtil;
 import com.zjj.util.common.DateUtil;
 
@@ -38,7 +41,11 @@ public class AdminAsynAction extends ActionSupport {
 	
 	private String value;
 	
+	private String type;
+	
 	private String id;
+	
+	private String parentId;
 	
 	/**
 	 * 资源新增
@@ -46,9 +53,24 @@ public class AdminAsynAction extends ActionSupport {
 	 * @return
 	 */
 	public String addResourceSubmit() {
+		if (StringUtils.isBlank(parentId)) {
+			parentId = "";
+		}
+		List<Map<String, Object>> resourceList = resourceService.queryAllResourceByLevel(parentId.length() + 1, parentId);
+		String[] sortArr = CommonUtil.getCharArray();
+		int num = 0;
+		if (CollectionUtils.isNotEmpty(resourceList)) {
+			num = resourceList.size();
+		}
+		// 超出最大限制
+		if (num > sortArr.length) {
+			statusCode = false;
+			return Action.SUCCESS;
+		}
 		ShiroResourceBean bean = new ShiroResourceBean();
 		bean.setUrl(url);
-		bean.setValue(value);
+		bean.setType(Integer.parseInt(type));
+		bean.setValue( parentId + sortArr[num]);
 		bean.setDescription(description);
 		String resourceId = resourceService.addShiroResource(bean);
 		statusCode = StringUtils.isNotBlank(resourceId);
@@ -160,4 +182,21 @@ public class AdminAsynAction extends ActionSupport {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+	
 }

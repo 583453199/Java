@@ -38,8 +38,19 @@ public class ShiroResourceServiceImpl implements ShiroResourceService{
 		return shiroResourceDao.updatePermissionInfo(updateList, addList, roleId);
 	}
 	
+	@Override
 	public List<Map<String, Object>> queryPermissionByRoleId(String roleId) {
 		return shiroResourceDao.queryPermissionByRoleId(roleId);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryAllResourceByLevel(int level, String prefix) {
+		return shiroResourceDao.queryAllResourceByLevel(level, prefix);
+	}
+	
+	@Override
+	public List<Map<String, Object>> queryResourceType(int type, String status) {
+		return shiroResourceDao.queryResourceType(type, status);
 	}
 
 	public ShiroResourceDao getShiroResourceDao() {

@@ -49,5 +49,31 @@ public interface ShiroResourceDao {
 	 */
 	public List<Map<String, Object>> queryPermissionByRoleId(String roleId);
 
+	/**
+	 * 角色 - 资源授权
+	 * 
+	 * @param updateList
+	 * @param addList
+	 * @param roleId
+	 * @return
+	 */
 	public boolean updatePermissionInfo(List<String> updateList, List<String> addList, String roleId);
+	
+	/**
+	 * 获取第N级中的所有资源对象
+	 * 
+	 * @param level
+	 * @param prefix
+	 * @return
+	 */
+	public List<Map<String, Object>> queryAllResourceByLevel(int level, String prefix);
+	
+	/**
+	 * 获取资源信息 
+	 * 
+	 * @param type
+	 * @param status
+	 * @return
+	 */
+	public List<Map<String, Object>> queryResourceType(int type, String status);
 }

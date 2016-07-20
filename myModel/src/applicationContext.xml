@@ -30,6 +30,7 @@
             <tx:method name="del*" propagation="REQUIRED" />  
             <tx:method name="edit*" propagation="REQUIRED" />  
             <tx:method name="save*" propagation="REQUIRED" />  
+            <tx:method name="add*" propagation="REQUIRED" />  
         </tx:attributes>  
     </tx:advice>
    
