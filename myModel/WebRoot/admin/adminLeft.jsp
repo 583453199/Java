@@ -12,10 +12,16 @@
 					</ul>
 				</li> 
 				<li><a href="/admin/roleManage.action" rel="roleManage">角色管理</a></li> 
-				<li class="last"><a href="/admin/resourceManage.action" rel="resourceManage">资源管理</a></li> 
+				<li class="last">
+					<a href="javascript:;" class="inactive active">资源管理</a>
+					<ul>
+						<li><a href="/admin/resourceManage.action" rel="resourceManage">资源管理</a></li>
+						<li><a href="/admin/resourceEdit.jsp" rel="resourceEdit">资源编辑</a></li>
+					</ul>
+				</li> 
 			</ul>
 		</li>
-		<%--<li><a href="javascript:;" class="inactive">组织机构</a>
+		<li><a href="javascript:;" class="inactive">组织机构</a>
 			<ul style="display: none">
 				<li><a href="javascript:;" class="inactive active">美协机关</a>
 					<ul>
@@ -40,6 +46,6 @@
 				<li class="last"><a href="javascript:;">《美术》杂志社</a></li> 
 			</ul>
 		</li>
-	--%>
+<%--	--%>
 	</ul>
 </div>

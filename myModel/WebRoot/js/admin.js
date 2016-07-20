@@ -30,7 +30,7 @@ $(document).ready(function() {
 		var thidREL = $(this).attr("rel");
 		var thidID = $(document).find("body").attr("id");
 		if (thidREL && thidREL == thidID) {
-			$(this).parents("li").find(".inactive").click();
+			$(this).parents("ul").siblings(".inactive").click();
 			$(this).addClass("select_01");
 		}
 	});
