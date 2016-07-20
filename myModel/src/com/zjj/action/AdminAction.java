@@ -27,7 +27,9 @@ import com.zjj.bean.ShiroResourceBean;
 import com.zjj.bean.UserBean;
 import com.zjj.service.ShiroResourceService;
 import com.zjj.service.ShiroRoleService;
+import com.zjj.service.ShiroService;
 import com.zjj.service.UserService;
+import com.zjj.shiro.resource.ResourceManage;
 import com.zjj.util.MyMD5Util;
 import com.zjj.util.common.Page;
 
@@ -43,6 +45,8 @@ public class AdminAction extends ActionSupport {
 	private ShiroResourceService resourceService;
 	
 	private ShiroRoleService roleService;
+	
+	private ShiroService shiroService;
 	
 	private Map<String, String> requestMap;
 	
@@ -224,7 +228,7 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	/**
-	 * 角色 - 资源授权
+	 * 角色资源  - 授权跳转
 	 * 
 	 * @return
 	 */
@@ -241,7 +245,7 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	/**
-	 * 角色 - 资源授权 - 提交
+	 * 角色资源 - 授权 - 提交
 	 * 
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -279,6 +283,10 @@ public class AdminAction extends ActionSupport {
 		}
 
 		boolean resultStatus = resourceService.updatePermissionInfo(updateList, addList, roleId);
+		if (resultStatus) {
+			// 重新加载角色与资源的访问关系
+			ResourceManage.resourceIdRolesMap = shiroService.queryResourceAndRoleMap();
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("RESULT_CODE", resultStatus ? "0" : "1");
 		JSONObject json = JSONObject.fromObject(map);
@@ -314,6 +322,15 @@ public class AdminAction extends ActionSupport {
 
 	public void setRoleService(ShiroRoleService roleService) {
 		this.roleService = roleService;
+	}
+	
+	@JSON(serialize = false)
+	public ShiroService getShiroService() {
+		return shiroService;
+	}
+
+	public void setShiroService(ShiroService shiroService) {
+		this.shiroService = shiroService;
 	}
 
 	public Map<String, String> getRequestMap() {

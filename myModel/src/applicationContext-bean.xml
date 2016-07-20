@@ -53,6 +53,7 @@
 		<property name="userService" ref="userService"></property>
 		<property name="resourceService" ref="resourceService"></property>
 		<property name="roleService" ref="roleService"></property>
+		<property name="shiroService" ref="shiroService"></property>
 		<property name="page" ref="page"></property>
 	</bean>
 	

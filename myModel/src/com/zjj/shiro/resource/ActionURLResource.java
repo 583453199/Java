@@ -5,7 +5,6 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
- * 2016-06-01 修改
  * 
  * <pre>
  * <li> 去掉uri字段以节约空间
