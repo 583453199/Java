@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="zjj" uri="http://10.204.42.36/s2shModel/tags"%>
+<%@ taglib prefix="zjj" uri="http://10.204.42.36/myModel/tags"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 

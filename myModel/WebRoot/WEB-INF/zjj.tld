@@ -5,8 +5,8 @@
 	<tlib-version>1.1.2</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>zjj</short-name>
-	<uri>http://10.204.42.36/s2shModel/tags</uri>
-	<description>Talk915 Tag Library.</description>
+	<uri>http://10.204.42.36/myModel/tags</uri>
+	<description>My Tag Library.</description>
 	<tag>
 		<name>hasResource</name>
 		<tag-class>com.zjj.shiro.tag.HasResourceTag</tag-class>

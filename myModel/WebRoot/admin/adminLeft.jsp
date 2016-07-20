@@ -1,26 +1,51 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="zjj" uri="http://10.204.42.36/s2shModel/tags"%>
+<%@ taglib prefix="zjj" uri="http://10.204.42.36/myModel/tags"%>
 <div class="adminLeft list">
 	<ul class="yiji">
 		<li><a href="/admin/adminIndex.action">个人中心</a></li>
+		<zjj:hasResource value="b">
 		<li><a href="javascript:;" class="inactive">权限管理</a>
 			<ul style="display: none">
-				<li><a href="javascript:;" class="inactive active">用户管理</a>
+				<zjj:hasResource value="ba">
+				<li>
+					<a href="javascript:;" class="inactive active">用户管理</a>
 					<ul>
-						<li><a href="/admin/userManage.action" rel="userManage">用户查询</a></li>
-						<li><a href="/admin/userAdd.jsp" rel="userAdd">用户新增</a></li>
+						<zjj:hasResource value="baa">
+						<li>
+							<a href="/admin/userManage.action" rel="userManage">用户查询</a>
+						</li>
+						</zjj:hasResource>
+						<zjj:hasResource value="bab">
+						<li>
+							<a href="/admin/userAdd.jsp" rel="userAdd">用户新增</a>
+						</li>
+						</zjj:hasResource>
 					</ul>
 				</li> 
-				<li><a href="/admin/roleManage.action" rel="roleManage">角色管理</a></li> 
+				</zjj:hasResource>
+				
+				<zjj:hasResource value="bb">
+				<li>
+					<a href="/admin/roleManage.action" rel="roleManage">角色管理</a>
+				</li>
+				</zjj:hasResource>
+				
+				<zjj:hasResource value="bc"> 
 				<li class="last">
 					<a href="javascript:;" class="inactive active">资源管理</a>
 					<ul>
-						<li><a href="/admin/resourceManage.action" rel="resourceManage">资源查询</a></li>
-						<li><a href="/admin/toResourceEdit.action" rel="resourceEdit">资源编辑</a></li>
+						<zjj:hasResource value="bca"> 
+							<li><a href="/admin/resourceManage.action" rel="resourceManage">资源查询</a></li>
+						</zjj:hasResource>
+						<zjj:hasResource value="bcb"> 
+							<li><a href="/admin/toResourceEdit.action" rel="resourceEdit">资源编辑</a></li>
+						</zjj:hasResource>
 					</ul>
 				</li> 
+				</zjj:hasResource>
 			</ul>
 		</li>
+		</zjj:hasResource>
 		<li><a href="javascript:;" class="inactive">组织机构</a>
 			<ul style="display: none">
 				<li><a href="javascript:;" class="inactive active">美协机关</a>
