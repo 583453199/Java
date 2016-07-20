@@ -48,7 +48,6 @@ public class ResourceManage {
 			return false;
 		}
 		
-		boolean hasRole = false;
 		// 要求能访问匹配到的所有受控资源
 		for (String resourceId : protectedResourceIds) {
 			Set<String> roles = resourceIdRolesMap.get(resourceId); // 允许访问该资源的角色
@@ -56,7 +55,9 @@ public class ResourceManage {
 			if (CollectionUtils.isEmpty(roles)) {
 				return false;
 			}
+			
 			// 如果属于其中一个角色，即可访问该资源
+			boolean hasRole = false;
 			for (String role : roles) {
 				if (subject.hasRole(role)) {
 					hasRole = true;
@@ -67,7 +68,7 @@ public class ResourceManage {
 				return false;
 			}
 		}
-		return hasRole;
+		return true;
 	}
 	
 	/**

@@ -15,7 +15,7 @@
 				<li class="last">
 					<a href="javascript:;" class="inactive active">资源管理</a>
 					<ul>
-						<li><a href="/admin/resourceManage.action" rel="resourceManage">资源管理</a></li>
+						<li><a href="/admin/resourceManage.action" rel="resourceManage">资源查询</a></li>
 						<li><a href="/admin/toResourceEdit.action" rel="resourceEdit">资源编辑</a></li>
 					</ul>
 				</li> 

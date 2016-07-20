@@ -99,7 +99,7 @@ public class ShiroRoleDaoImpl implements ShiroRoleDao {
 		insert.value("builtin", builtin);
 		
 		Service service = new Service(insert);
-		service.useCustomResultTransformer();
+		service.useTransaction();
 		service.setDescription(this.getClass() + ".addRole()");
 		Map<String, Object> result = hibernateBasic.execute(service);
 		if (CommonUtil.isInvalid(result)) {
