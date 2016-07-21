@@ -59,7 +59,7 @@
 	</div>
 	
 	<!-- 页面底部 -->
-	<%@ include file="/pageRoot.jsp"%>
+	<%@include file="/admin/adminBottom.jsp" %>
 
 	<!-- 页面底部 end -->
 	<%=com.zteict.talk915.util.FileVersion.importJSFromJSDir(

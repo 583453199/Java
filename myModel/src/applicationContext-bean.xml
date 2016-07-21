@@ -26,6 +26,9 @@
 	<bean id="shiroRoleDao" class="com.zjj.dao.impl.ShiroRoleDaoImpl">
 		<property name="hibernateBasic" ref="hibernateBasic"></property>
 	</bean>
+	<bean id="newUserDao" class="com.zjj.dao.impl.NewUserDaoImpl">
+		<property name="hibernateBasic" ref="hibernateBasic"></property>
+	</bean>
 	
 	<!--  Service 注入 -->
 	<bean id="userService" class="com.zjj.service.impl.UserServiceImpl">
@@ -41,6 +44,9 @@
 	<bean id="roleService" class="com.zjj.service.impl.ShiroRoleServiceImpl">
 		<property name="shiroRoleDao" ref="shiroRoleDao"></property>
 	</bean>
+	<bean id="newUserService" class="com.zjj.service.impl.NewUserServiceImpl">
+		<property name="newUserDao" ref="newUserDao"></property>
+	</bean>
 	
 	<!-- Action 注入 -->
 	<bean id="userAction" class="com.zjj.action.UserAction" scope="prototype">
@@ -50,6 +56,7 @@
 	<bean id="studentAction" class="com.zjj.action.StudentAction" scope="prototype"></bean>
 	
 	<bean id="adminAction" class="com.zjj.action.AdminAction" scope="prototype">
+		<property name="newUserService" ref="newUserService"></property>
 		<property name="userService" ref="userService"></property>
 		<property name="resourceService" ref="resourceService"></property>
 		<property name="roleService" ref="roleService"></property>
@@ -63,4 +70,10 @@
 		<property name="resourceService" ref="resourceService"></property>
 		<property name="roleService" ref="roleService"></property>
 	</bean>
+	
+	<bean id="asynAction" class="com.zjj.action.AsynAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="uploadDownloadAction" class="com.zjj.action.UploadDownloadAction"></bean>
 </beans>

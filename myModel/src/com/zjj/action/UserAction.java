@@ -3,6 +3,8 @@ package com.zjj.action;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.json.annotations.JSON;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,7 +23,6 @@ public class UserAction extends ActionSupport {
 
 	private UserService userService;
 	private Map<String, String> requestMap;
-
 	private String account;
 	private String password;
 	private String msg;
@@ -64,6 +65,23 @@ public class UserAction extends ActionSupport {
 	}
 	
 	/**
+	 * 用户首页
+	 * 
+	 * @return
+	 */
+	public String userIndex() {
+		String userType = SessionUtil.getUserSessionInfo("USER_TYPE");
+		if ("1".equals(userType)) {
+			return "toStudentIndex";
+		} else if ("2".equals(userType)) {
+			return "toTeacherIndex";
+		} else if ("3".equals(userType)) {
+			return "toAdminIndex";
+		}
+		return "toIndex";
+	}
+	
+	/**
 	 * 用户注册
 	 * 
 	 * @return
@@ -91,6 +109,14 @@ public class UserAction extends ActionSupport {
 	 */
 	public String logout() {
 		SessionUtil.putUserInSession(null);
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			// session 会销毁，在SessionListener监听session销毁，清理权限缓存
+			subject.logout();
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("用户退出登录");
+			}
+		}
 		return "toIndex";
 	}
 
@@ -139,5 +165,5 @@ public class UserAction extends ActionSupport {
 	public void setRequestMap(Map<String, String> requestMap) {
 		this.requestMap = requestMap;
 	}
-	
+
 }

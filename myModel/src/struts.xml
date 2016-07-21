@@ -15,7 +15,7 @@
 	
 	<package name="user" extends="struts-default" namespace="/user">
 		<action name="*" class="userAction" method="{1}">
-			<result name="login">/login.jsp</result>
+			<result name="login">/index.jsp</result>
 			<result name="success">/success.jsp</result>
 			<result name="error">/error.jsp</result>
 			<result name="index">/index.jsp</result>
@@ -68,6 +68,13 @@
 			<result name="resourceEdit">/admin/resourceEdit.jsp</result>
 			<result name="roleManage">/admin/roleManage.jsp</result>
 			<result name="roleResourceEdit">/admin/roleResourceEdit.jsp</result>
+			<result name="toExcle" type="chain">
+				<param name="namespace">/file</param>
+				<param name="actionName">downExcle</param>
+				<param name="exportFlag">${down}</param>
+				<param name="path">${path}</param>
+				<param name="excelPath">${excelPath}</param>
+			</result>
 		</action>
 	</package>
 	
@@ -76,4 +83,12 @@
 			<result type="json"></result>
 		</action>
 	</package>
+	
+	<package name="asyn" extends="struts-default,json-default" namespace="/asyn">
+		<action name="*" class="asynAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+	
+	<include file="struts_upload_down.xml"></include>
 </struts>

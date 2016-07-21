@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<!-- 导出  并发连接次数-->
+    <path>
+    	<name>EXPORT_CONNECTION_COUNT</name>
+    	<path>5</path>
+    </path>
+    
+    <!-- 导出 每页显示数量 -->
+    <path>
+    	<name>EXPORT_PAGE_SIZE</name>
+    	<path>10000</path>
+    </path>
+</paths>

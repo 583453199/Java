@@ -162,7 +162,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("LIST", list);
-		map.put("TOTAL_NUM", totalNum);
+		map.put("TOTAL_NUM", totalNum + "");
 		return map;
 	}
 	

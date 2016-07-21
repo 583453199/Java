@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+           "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="file" extends="struts-default,json-default" namespace="/file">
+		<!-- 用于处理下载文件点击取消时报出异常问题 --> 
+ 		<result-types> 
+	 		<result-type name="streamx" class="com.sunspoter.lib.web.struts2.dispatcher.StreamResultX"></result-type>
+		</result-types>
+		<action name="*" class="uploadDownloadAction" method="{1}">
+			 <result name="success" type="streamx">   
+			       <!--这是下载文件的类型      这个是所有类型-->   
+			       <param name="contentType">application/octet-stream;charset=ISO8859-1</param>  
+			       <!--这是获取文件的输入流，在Action中是核心点-->   
+			       <param name="inputName">inputStream</param>  
+			       <!--下载文件的处理方式-->    
+			       <param name="contentDisposition">attachment;filename="${downFileName}"</param>  
+			       <!--缓存区大小-->    
+			       <param name="bufferSize">4096</param>   
+   			</result>
+   			<result name="input" >/error.jsp</result>
+		</action>
+  </package>
+</struts>

@@ -35,7 +35,7 @@
 		</form>
 		</div>
 	</div>
-	
+	<%@include file="/admin/adminBottom.jsp" %>
 	<script type="text/javascript">
 		function sub() {
 			$("#form1").submit();

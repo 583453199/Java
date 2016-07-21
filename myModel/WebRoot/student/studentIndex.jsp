@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>管理员首页</title>
+<title>学生首页</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -23,12 +23,6 @@
 <link rel="stylesheet" type="text/css" href="/css/admin.css">
 </head>
 <body>
-	<jsp:include page="/admin/adminTop.jsp"></jsp:include>
-	
-	<div class="adminContent">
-		<jsp:include page="/admin/adminLeft.jsp"/>
-		<div>个人首页</div>
-	</div>
-	<%@include file="/admin/adminBottom.jsp" %>
+	学生首页	
 </body>
 </html>

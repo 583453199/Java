@@ -23,8 +23,8 @@ a:link,a:visited{text-decoration: none;}
 .last{ background-color:#d6e6f1; border-color:#6196bb; }
 .list ul li ul li ul li a{ color:#316a91; padding-left:30px;}
 
-.adminContent {border: 1px solid #e1e1e1;position: relative;overflow: hidden;margin:0 0 40px;}
-.adminLeft {position: relative;left: 0px;top:0px;float: left;min-height: 500px;}
+.adminContent {border: 1px solid #e1e1e1;position: relative;overflow: hidden;}
+.adminLeft {position: relative;left: 0px;top:0px;float: left;min-height: 545px;margin-bottom: 4px;}
 .rightContent {margin-left: 225px;margin-right: 3px;}
 
 .input01 {

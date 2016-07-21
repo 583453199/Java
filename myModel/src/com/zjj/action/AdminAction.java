@@ -1,5 +1,6 @@
 package com.zjj.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,30 +9,32 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import jxl.Workbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.StrutsStatics;
 import org.apache.struts2.json.annotations.JSON;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zjj.bean.ShiroResourceBean;
 import com.zjj.bean.UserBean;
+import com.zjj.service.NewUserService;
 import com.zjj.service.ShiroResourceService;
 import com.zjj.service.ShiroRoleService;
 import com.zjj.service.ShiroService;
 import com.zjj.service.UserService;
 import com.zjj.shiro.resource.ResourceManage;
 import com.zjj.util.MyMD5Util;
+import com.zjj.util.SessionUtil;
 import com.zjj.util.common.Page;
+import com.zjj.util.export.ExportTool;
 
 public class AdminAction extends ActionSupport {
 
@@ -41,6 +44,8 @@ public class AdminAction extends ActionSupport {
 	private static final long serialVersionUID = -7032861181936643243L;
 
 	private UserService userService;
+	
+	private NewUserService newUserService;
 	
 	private ShiroResourceService resourceService;
 	
@@ -59,6 +64,10 @@ public class AdminAction extends ActionSupport {
 	private String msg;
 	private String content;
 	private boolean resultStatus;
+	private String down;
+	private String excelPath;
+	private String path;
+	private String exportFlag;
 	
 	/**
 	 * 管理员后台首页
@@ -113,14 +122,69 @@ public class AdminAction extends ActionSupport {
 		if (MapUtils.isEmpty(requestMap)) {
 			requestMap = new HashMap<String, String>();
 		}
-		Map<String, Object> map = userService.queryUserList(requestMap, page);
+		if ("down".equals(down)) {
+			Map<String, Object> paramsMap = new HashMap<String, Object>();
+			paramsMap.put("METHOD_NAME", "queryUserList");
+			paramsMap.put("EXPORT_METHOD_NAME", "exportUserManage");
+			paramsMap.put("PARAMS", requestMap);
+			paramsMap.put("RESULT_LIST_NAME", "LIST");
+			paramsMap.put("LOGIN_USER_ID", SessionUtil.getUserSessionInfo("USER_ID"));
+			paramsMap.put("EXPORT_TITLE_NAME", "用户列表");
+			paramsMap.put("EXTRA", "");
+			excelPath = ExportTool.exportPageByGroup(newUserService, AdminAction.class, paramsMap);
+			path = "userManage";
+			return "toExcle";
+		}
+		
+		Map<String, Object> map = newUserService.queryUserList(requestMap, page);
 		if (MapUtils.isNotEmpty(map)) {
 			userList =  (List<UserBean>) map.get("LIST");
-			page.setTotalNum((Integer) map.get("TOTAL_NUM"));
+			page.setTotalNum(Integer.parseInt((String) map.get("TOTAL_NUM")));
 		}
 		return "userManage";
 	}
 	
+	/**
+	 * 导出用户列表
+	 * 
+	 * @param fos
+	 * @param exportList
+	 */
+	public void exportUserManage(String fos, ArrayList<Map<String, Object>> exportList) {
+		jxl.write.WritableWorkbook wwb;
+		try {
+			wwb = Workbook.createWorkbook(new File(fos));
+			// 自定义的标签名称
+			jxl.write.WritableSheet ws = wwb.createSheet("用户", 0);
+			String[] columnTitle = { "用户ID", "账号", "姓名", "年龄", "用户类型" };
+
+			// 设置表格的列标题
+			for (int i = 0; i < columnTitle.length; i++) {
+				ws.setColumnView(i, 27);
+				ws.addCell(new jxl.write.Label(i, 0, columnTitle[i]));
+			}
+
+			int m = 1;
+			for (Map<String, Object> map : exportList) {
+				ws.addCell(new jxl.write.Label(0, m, map.get("USER_ID") + ""));
+				ws.addCell(new jxl.write.Label(1, m, map.get("ACCOUNT") + ""));
+				ws.addCell(new jxl.write.Label(2, m, map.get("USER_NAME") + ""));
+				ws.addCell(new jxl.write.Label(2, m, map.get("AGE") + ""));
+				ws.addCell(new jxl.write.Label(4, m, map.get("USER_TYPE") + ""));
+				m++;
+			}
+			wwb.write();
+			// 关闭Excel工作薄对象
+			wwb.close();
+		} catch (IOException e) {
+			LOG.error("导出用户数据excel数据IO异常。", e);
+		} catch (RowsExceededException e) {
+			LOG.error("导出用户数据excel数据行溢出(达到行的最大限制)异常。", e);
+		} catch (WriteException e) {
+			LOG.error("导出用户数据excel写入数据异常。", e);
+		}
+	}
+
 	/**
 	 * 跳转到 - 用户角色 - 授权
 	 * 
@@ -296,6 +360,15 @@ public class AdminAction extends ActionSupport {
 			e.printStackTrace();
 		}
 	}
+	
+	@JSON(serialize = false)
+	public NewUserService getNewUserService() {
+		return newUserService;
+	}
+
+	public void setNewUserService(NewUserService newUserService) {
+		this.newUserService = newUserService;
+	}
 
 	@JSON(serialize = false)
 	public UserService getUserService() {
@@ -397,6 +470,38 @@ public class AdminAction extends ActionSupport {
 
 	public void setResultStatus(boolean resultStatus) {
 		this.resultStatus = resultStatus;
+	}
+	
+	public String getDown() {
+		return down;
+	}
+
+	public void setDown(String down) {
+		this.down = down;
+	}
+
+	public String getExcelPath() {
+		return excelPath;
+	}
+
+	public void setExcelPath(String excelPath) {
+		this.excelPath = excelPath;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getExportFlag() {
+		return exportFlag;
+	}
+
+	public void setExportFlag(String exportFlag) {
+		this.exportFlag = exportFlag;
 	}
 	
 }

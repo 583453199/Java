@@ -28,4 +28,14 @@ public class SQLTest {
 		command.getStatement();
 		System.out.println(command);
 	}
+	
+	@Test
+	public void test2() {
+		String name = "_ame_";
+		name = name.replaceAll("_", "_\u0001");
+		String[] array = name.split("_");
+		for (String string : array) {
+			System.out.println("对象=" + string);
+		}
+	}
 }

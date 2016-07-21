@@ -222,26 +222,3 @@ a {
 	overflow: hidden;
 }
 
-.footer {
-	height: 100px;
-	background-color: rosybrown;
-}
-
-.yqlj_ul {
-	list-style: none;
-	color: white;
-	position: absolute;
-	top: 20px;
-	left: 130px;
-}
-
-.yqlj_ul2 {
-	list-style: none;
-	color: white;
-}
-
-.yqlj_ul li,.yqlj_ul2 li {
-	margin-left: 10px;
-	float: left;
-	color: white;
-}

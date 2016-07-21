@@ -36,6 +36,7 @@
 			</form>
 		</div>
 	</div>
+	<%@include file="/admin/adminBottom.jsp" %>
 	<script type="text/javascript" src="/js/jquery.placeholder.js"></script>
 	<script type="text/javascript" src="/js/jquery.zxxbox.3.0.js"></script>
 	<script type="text/javascript" src="/js/ztree/jquery.ztree.core.custom.js"></script>

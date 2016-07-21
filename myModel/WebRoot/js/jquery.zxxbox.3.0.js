@@ -386,7 +386,7 @@
 		index: 2000,
 		opacity: 0.3,
 		
-		width: "auto",
+		width: "350",
 		height: "auto",
 		
 		bar: true, //是否显示标题栏

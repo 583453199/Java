@@ -27,6 +27,7 @@
 			<form action="admin/userManage.action" id="form1" method="post">
 				<s:hidden name="page.currentPage" id="currentPage"/>
                	<s:hidden name="page.pageCount" id="pageCount"/>
+               	<input type="hidden" name="down" id="down"/>
 				<table class="search_table">
 					<tbody>
 						<tr>
@@ -41,7 +42,8 @@
 							</td>
 							<td align="right">
 								<label><a href="javascript:;" id="subSearch" class="my_button w_70 color01">搜索</a></label>
-								<label class="ml_10 mr_20"><a href="<%=basePath%>admin/userAdd.jsp" class="my_button w_70">用户新增</a></label>
+								<label class="ml_10"><a href="<%=basePath%>admin/userAdd.jsp" class="my_button w_70">用户新增</a></label>
+								<label class="ml_10 mr_20"><a href="javascript:;" onclick="formSubmit(1, true);" class="my_button w_50">导出</a></label>
 							</td>
 						</tr>
 					</tbody>
@@ -72,17 +74,17 @@
 						<s:else>
 							<s:iterator value="userList" var="user">
 								<tr>
-									<td><s:property value="#user.userId"/></td>
-									<td><s:property value="#user.account"/></td>
-									<td><s:property value="#user.userName"/></td>
-									<td><s:property value="#user.age"/></td>
-									<td><s:if test="#user.userType == 1">学生</s:if>
-										<s:elseif test="#user.userType == 2">老师</s:elseif>
-										<s:elseif test="#user.userType == 3">管理员</s:elseif>
+									<td><s:property value="#user.USER_ID"/></td>
+									<td><s:property value="#user.ACCOUNT"/></td>
+									<td><s:property value="#user.USER_NAME"/></td>
+									<td><s:property value="#user.AGE"/></td>
+									<td><s:if test="#user.USER_TYPE == 1">学生</s:if>
+										<s:elseif test="#user.USER_TYPE == 2">老师</s:elseif>
+										<s:elseif test="#user.USER_TYPE == 3">管理员</s:elseif>
 									</td>
 									<td>
 										<label><a href="javascript:;" class="x_button w_50 color02">删除</a></label>
-										<label class="ml_10"><a href="/admin/toUserRoleEdit.action?id=<s:property value="#user.userId"/>" class="x_button w_100 color02">用户角色授权</a></label>
+										<label class="ml_10"><a href="/admin/toUserRoleEdit.action?id=<s:property value="#user.USER_ID"/>" class="x_button w_100 color02">用户角色授权</a></label>
 									</td>
 								</tr>
 							</s:iterator>
@@ -96,6 +98,7 @@
 			</form>
 		</div>
 	</div>
+	<%@include file="/admin/adminBottom.jsp" %>
 	<script type="text/javascript" src="/js/jquery.placeholder.js"></script>
 	<script type="text/javascript" src="/js/pager/pager.js"></script>
 	
@@ -119,18 +122,23 @@
 					i18n : 'zh',
 					mode : 'click',
 					click : function(n){
-						$("#currentPage").val(""+n);
-						$("#form1").submit();
+						formSubmit(n, false);
 						return false;
 					}
 				});
 			}
 			
 			$("#subSearch").bind("click",function() {
-				$("#currentPage").val("1");
-				$("#form1").submit(); 
+				formSubmit(1, false);
 			});
 		})
+		
+		function formSubmit(currentPage, down) {
+			var downVal = down ? "down" : ""; 
+			$("#currentPage").val(currentPage);
+			$("#down").val(downVal);
+			$("#form1").submit();
+		} 
 	</script>
 </body>
 </html>

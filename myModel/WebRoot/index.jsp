@@ -26,8 +26,8 @@
             <ul>
                 <li><a href="#" class="btn1">菜单1</a></li>
                 <li><a href="#" class="btn2">菜单2</a></li>
-                <li><a href="#" class="btn1">菜单3</a></li>
-                <li><a href="#" class="btn1">菜单4</a></li>
+                <li><a href="/user/userIndex.action" class="btn1">个人中心</a></li>
+                <li><a href="/user/logout.action" class="btn1"><s:if test="#session.user.ACCOUNT != null && #session.user.ACCOUNT != ''">退出</s:if><s:else>菜单</s:else></a></li>
                 <li><a href="#" class="btn1"><s:if test="#session.user.ACCOUNT != null && #session.user.ACCOUNT != ''"><s:property value="#session.user.ACCOUNT"/></s:if>用户</a></li>
             </ul>
         </div>
