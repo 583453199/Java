@@ -3,10 +3,10 @@ package com.zjj.util.json;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.zjj.util.DateUtil;
-
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
+
+import com.zjj.util.common.DateUtil;
 /**
  * @version 1.0
  */

@@ -90,5 +90,11 @@
 		</action>
 	</package>
 	
+	<package name="talkRoom" extends="struts-default,json-default" namespace="/talkRoom">
+		<action name="*" class="talkRoomAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+	
 	<include file="struts_upload_down.xml"></include>
 </struts>

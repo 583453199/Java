@@ -13,7 +13,7 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-	<!--  Dao 注入 -->
+	<!--  dao 注入 -->
 	<bean id="userDao" class="com.zjj.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -30,7 +30,7 @@
 		<property name="hibernateBasic" ref="hibernateBasic"></property>
 	</bean>
 	
-	<!--  Service 注入 -->
+	<!--  service 注入 -->
 	<bean id="userService" class="com.zjj.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
@@ -48,7 +48,7 @@
 		<property name="newUserDao" ref="newUserDao"></property>
 	</bean>
 	
-	<!-- Action 注入 -->
+	<!-- action 注入 -->
 	<bean id="userAction" class="com.zjj.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
@@ -76,4 +76,6 @@
 	</bean>
 	
 	<bean id="uploadDownloadAction" class="com.zjj.action.UploadDownloadAction"></bean>
+	
+	<bean id="talkRoomAction" class="com.zjj.action.TalkRoomAction"></bean>
 </beans>

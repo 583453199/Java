@@ -59,5 +59,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ant.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-sunspoter-stream-1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/comet4j-tomcat7.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

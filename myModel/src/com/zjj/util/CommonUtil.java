@@ -24,7 +24,7 @@ public class CommonUtil {
 	private static Log log = LogFactory.getLog(CommonUtil.class);
 	
 	public static final String RET_STATUS = "RET_STATUS";
-
+	
 	public static boolean subjectLogin(String account, String password) {
 		boolean status = false;
 		Subject subject = SecurityUtils.getSubject();
